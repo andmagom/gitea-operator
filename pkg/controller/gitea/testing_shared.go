@@ -1,7 +1,7 @@
 package gitea
 
 import (
-	integreatlyv1alpha1 "github.com/integr8ly/gitea-operator/pkg/apis/integreatly/v1alpha1"
+	integreatlyv1alpha1 "github.com/andmagom/gitea-operator/pkg/apis/integreatly/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

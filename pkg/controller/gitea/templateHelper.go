@@ -8,7 +8,7 @@ import (
 	"os"
 	"text/template"
 
-	integreatlyv1alpha1 "github.com/integr8ly/gitea-operator/pkg/apis/integreatly/v1alpha1"
+	integreatlyv1alpha1 "github.com/andmagom/gitea-operator/pkg/apis/integreatly/v1alpha1"
 )
 
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")

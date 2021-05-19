@@ -1,8 +1,8 @@
 package gitea
 
 import (
+	integreatlyv1alpha1 "github.com/andmagom/gitea-operator/pkg/apis/integreatly/v1alpha1"
 	yaml "github.com/ghodss/yaml"
-	integreatlyv1alpha1 "github.com/integr8ly/gitea-operator/pkg/apis/integreatly/v1alpha1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 )

@@ -1,7 +1,7 @@
 package apis
 
 import (
-	"github.com/integr8ly/gitea-operator/pkg/apis/integreatly/v1alpha1"
+	"github.com/andmagom/gitea-operator/pkg/apis/integreatly/v1alpha1"
 )
 
 func init() {

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/integr8ly/gitea-operator/pkg/controller/gitea"
+	"github.com/andmagom/gitea-operator/pkg/controller/gitea"
 )
 
 func init() {
