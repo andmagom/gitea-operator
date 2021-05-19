@@ -18,6 +18,8 @@ spec:
         name: {{ .GiteaPgDeploymentName }}
       name: {{ .GiteaPgDeploymentName }}
     spec:
+      securityContext:
+        fsGroup: 2000
       serviceAccountName: {{ .GiteaServiceAccountName }}
       containers:
       - env:
