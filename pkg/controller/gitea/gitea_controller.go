@@ -77,7 +77,7 @@ type ReconcileGitea struct {
 // The Controller will requeue the Request to be processed again if the returned error is non-nil or
 // Result.Requeue is true, otherwise upon completion it will remove the work from the queue.
 func (r *ReconcileGitea) Reconcile(request reconcile.Request) (reconcile.Result, error) {
-	log.Printf("Reconciling Gitea %s/%s\n", request.Namespace, request.Name)
+	log.Printf("Reconciling  Gitea %s/%s\n", request.Namespace, request.Name)
 
 	// Fetch the Gitea instance
 	instance := &integreatlyv1alpha1.Gitea{}
