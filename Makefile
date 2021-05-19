@@ -3,7 +3,7 @@ NAMESPACE ?= gitea
 PROJECT=gitea-operator
 SHELL= /bin/bash
 TAG ?= 0.0.5
-PKG = github.com/integr8ly/gitea-operator
+PKG = github.com/andmagom/gitea-operator
 COMPILE_OUTPUT = build/_output/bin/gitea-operator
 
 .PHONY: setup/dep
@@ -42,11 +42,11 @@ code/fix:
 
 .PHONY: image/build
 image/build: code/compile
-	@operator-sdk build quay.io/${ORG}/${PROJECT}:${TAG}
+	@operator-sdk build ${ORG}/${PROJECT}:${TAG}
 
 .PHONY: image/push
 image/push:
-	@docker push quay.io/$(ORG)/$(PROJECT):$(TAG)
+	@docker push $(ORG)/$(PROJECT):$(TAG)
 
 .PHONY: image/build/push
 image/build/push: image/build image/push
@@ -64,7 +64,7 @@ test/e2e:
 .PHONY: cluster/prepare
 cluster/prepare:
 	-kubectl apply -f deploy/crds/crd.yaml
-	-oc new-project $(NAMESPACE)
+	-kubectl create ns $(NAMESPACE)
 	-kubectl create --insecure-skip-tls-verify -f deploy/role.yaml -n $(NAMESPACE)
 	-kubectl create --insecure-skip-tls-verify -f deploy/role_binding.yaml -n $(NAMESPACE)
 	-kubectl create --insecure-skip-tls-verify -f deploy/service_account.yaml -n $(NAMESPACE)
@@ -75,7 +75,7 @@ cluster/deploy:
 
 .PHONY: cluster/deploy/remove
 cluster/deploy/remove:
-	-kubectl create -f deploy/operator.yaml -n ${NAMESPACE}
+	-kubectl delete -f deploy/operator.yaml -n ${NAMESPACE}
 
 .PHONY: cluster/clean
 cluster/clean:
@@ -83,7 +83,7 @@ cluster/clean:
 	-kubectl delete -f deploy/role_binding.yaml -n $(NAMESPACE)
 	-kubectl delete -f deploy/service_account.yaml -n $(NAMESPACE)
 	-kubectl delete -f deploy/crds/crd.yaml -n $(NAMESPACE)
-	-oc delete project $(NAMESPACE)
+	-kubectl delete ns $(NAMESPACE)
 
 .PHONY: cluster/create/examples
 cluster/create/examples:
