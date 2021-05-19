@@ -15,7 +15,7 @@ spec:
       serviceAccountName: gitea-operator
       containers:
         - name: gitea-operator
-          image: quay.io/integreatly/gitea-operator:master
+          image: andmagom/gitea-operator:v10
           ports:
           - containerPort: 60000
             name: metrics

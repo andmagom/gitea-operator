@@ -2,19 +2,21 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
+	"os"
 	"runtime"
 
-	"github.com/integr8ly/gitea-operator/pkg/apis"
-	"github.com/integr8ly/gitea-operator/pkg/controller"
-	k8sutil "github.com/operator-framework/operator-sdk/pkg/util/k8sutil"
+	"math/rand"
+	"time"
+
+	"github.com/andmagom/gitea-operator/pkg/apis"
+	"github.com/andmagom/gitea-operator/pkg/controller"
 	sdkVersion "github.com/operator-framework/operator-sdk/version"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
-	"math/rand"
 	"sigs.k8s.io/controller-runtime/pkg/client/config"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/runtime/signals"
-	"time"
 )
 
 func printVersion() {
@@ -23,13 +25,26 @@ func printVersion() {
 	log.Printf("operator-sdk Version: %v", sdkVersion.Version)
 }
 
+func getWatchNamespace() (string, error) {
+	// WatchNamespaceEnvVar is the constant for env variable WATCH_NAMESPACE
+	// which specifies the Namespace to watch.
+	// An empty value means the operator is running with cluster scope.
+	var watchNamespaceEnvVar = "WATCH_NAMESPACE"
+
+	ns, found := os.LookupEnv(watchNamespaceEnvVar)
+	if !found {
+		return "", fmt.Errorf("%s must be set", watchNamespaceEnvVar)
+	}
+	return ns, nil
+}
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	printVersion()
 	flag.Parse()
 
-	namespace, err := k8sutil.GetWatchNamespace()
+	namespace, err := getWatchNamespace()
 	if err != nil {
 		log.Fatalf("failed to get watch namespace: %v", err)
 	}
@@ -61,7 +76,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Print("Starting the Cmd.")
+	log.Print("Starting the Cmd. ")
 
 	// Start the Cmd
 	log.Fatal(mgr.Start(signals.SetupSignalHandler()))

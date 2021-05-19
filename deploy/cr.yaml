@@ -2,5 +2,6 @@ apiVersion: integreatly.org/v1alpha1
 kind: Gitea
 metadata:
   name: example-gitea
+  namespace: gitea
 spec:
-  hostname: "gitea.apps.127.0.0.1.nip.io"
+  hostname: "gitea.app.gdambor.com"
